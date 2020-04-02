@@ -19,6 +19,22 @@
     <mvc:resources location="/js/" mapping="/js/**"/>
     <mvc:resources location="/images/" mapping="/images/**"/>
 
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 所有的请求都进入拦截器 -->
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/tbItem/*"/>
+            <!-- 配置具体的拦截器 -->
+            <bean class="top.madianpeng.interceptor.MyInterceptor1" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- 所有的请求都进入拦截器 -->
+            <mvc:mapping path="/**" />
+            <!-- 配置具体的拦截器 -->
+            <bean class="top.madianpeng.interceptor.MyInterceptor2" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- 文件上传 -->
     <bean id="multipartResolver"

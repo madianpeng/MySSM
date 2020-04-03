@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.madianpeng.mapper.TbTeacherMapper">
+
+    <resultMap type="top.madianpeng.entity.TbTeacher" id="TbTeacherMap">
+        <result property="tno" column="tno" jdbcType="VARCHAR"/>
+        <result property="tname" column="tname" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbTeacherMap">
+        select
+          tno, tname
+        from teacher
+        where tno = #{tno}
+    </select>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from teacher where id = #{tno}
+    </delete>
+
+</mapper>

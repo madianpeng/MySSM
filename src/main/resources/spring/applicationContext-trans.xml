@@ -11,8 +11,14 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<!-- 数据源 -->
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="multipleDataSource" />
 	</bean>
+
+	<bean id="multipleDataSourceAspectAdvice" class="top.madianpeng.commen.MultipleDataSourceAspectAdvice"></bean>
+
+	<!--启用aspectj注解功能-->
+
+	<aop:aspectj-autoproxy/>
 	<!-- 通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>

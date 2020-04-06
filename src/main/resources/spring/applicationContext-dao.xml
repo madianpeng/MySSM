@@ -12,44 +12,22 @@
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath:conf/db.properties,classpath:conf/resource.properties"  ignore-unresolvable="true"/>
 	<!-- 数据库连接池 -->
-	<bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
-		<property name="url" value="${jdbc1.url}" />
-		<property name="username" value="${jdbc1.username}" />
-		<property name="password" value="${jdbc1.password}" />
-		<property name="driverClassName" value="${jdbc1.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="maxActive" value="10" />
 		<property name="minIdle" value="5" />
-	</bean>
-	<!-- 数据库连接池 -->
-	<bean id="dataSource2" class="com.alibaba.druid.pool.DruidDataSource"
-		destroy-method="close">
-		<property name="url" value="${jdbc2.url}" />
-		<property name="username" value="${jdbc2.username}" />
-		<property name="password" value="${jdbc2.password}" />
-		<property name="driverClassName" value="${jdbc2.driver}" />
-		<property name="maxActive" value="10" />
-		<property name="minIdle" value="5" />
-	</bean>
-
-
-	<bean id="multipleDataSource" class="top.madianpeng.commen.MultipleDataSource">
-		<property name="defaultTargetDataSource" ref="dataSource1"/>
-		<property name="targetDataSources">
-			<map>
-				<entry key="dataSource1" value-ref="dataSource1"/>
-				<entry key="dataSource2" value-ref="dataSource2"/>
-			</map>
-		</property>
 	</bean>
 	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 数据库连接池 -->
-		<property name="dataSource" ref="multipleDataSource" />
+		<property name="dataSource" ref="dataSource" />
 		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
 	</bean>
-
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="top.madianpeng.mapper" />
 	</bean>
